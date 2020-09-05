@@ -47,4 +47,16 @@ if (program.config) {
     console.log('Operating in current directory...');
 }
 
+options.merge = "messages_en.properties";
+options.config= {
+    src: "./../signus-service/src/main/webapp/i18n/en",
+    dist: "./../signus-service/src/main/resources/i18n"
+};
+processor.process(options);
+
+options.merge = "messages_ko.properties";
+options.config= {
+    src: "../signus-service/src/main/webapp/i18n/ko",
+    dist: "../signus-service/src/main/resources/i18n"
+};
 processor.process(options);

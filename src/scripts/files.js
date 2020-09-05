@@ -134,14 +134,46 @@ exports.writeAsProperties = function (dir, file, entries) {
         return;
     }
 
+    entries = entries.sort(function(a, b){
+        return a.localeCompare(b);
+    });
+    const startKey = "# generated properties begin";
+    const endKey = "# generated properties end";
+
     var fileName = stripExtension(file); // Omit the file extension
-    var writeStream = fs.createWriteStream(dir.concat('/').concat(fileName.concat('.properties')), {
+    let fileFullPath = dir.concat('/').concat(fileName.concat('.properties'));
+    let content = "";
+    if (fs.existsSync(fileFullPath)) {
+        content = fs.readFileSync(fileFullPath, 'utf8');
+        let startIndex = content.indexOf(startKey);
+        let endIndex = content.indexOf(endKey);
+        if (startIndex > -1 && endIndex > -1){
+            content = content.substring(0, startIndex - 1) + content.substring(endIndex + endKey.length);
+        }
+    }
+
+    var writeStream = fs.createWriteStream(fileFullPath, {
         autoClose: false
     });
 
+    if (content && content.length > 0) {
+        writeStream.write(content);
+    }
+    writeStream.write('\n');
+    writeStream.write(startKey.concat('\n'));
+    let isFirstLine = true;
     entries.forEach(function (entry) {
-        writeStream.write(entry.concat('\n'));
+        if (isFirstLine){
+            isFirstLine = false;
+            if (entry && entry.trim().length > 0) {
+                writeStream.write(entry.concat('\n'));
+            }
+        } else {
+            writeStream.write(entry.concat('\n'));
+        }
+
     });
+    writeStream.write(endKey);
     writeStream.end(); // Close the write stream
 };
 

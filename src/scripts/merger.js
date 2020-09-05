@@ -27,7 +27,8 @@ exports.Merger = function Merger() {
 
             if (collection.items) {
                 collection.items.forEach(function (item) {
-                    items.push(prefix.toUpperCase().concat('.').concat(item));
+                    // items.push(prefix.toUpperCase().concat('.').concat(item));
+                    items.push(item);
                 });
             }
         });

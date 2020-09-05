@@ -26,7 +26,7 @@ exports.processOptions = function (options) {
             jsonFiles.forEach(function (file) {
                 var data = files.getFileDataAsString(config.src, file); // Read the file data as utf8 encoded string
                 var entries = parser.deflate(JSON.parse(data)); // Convert the JSON structure into an array of strings
-                files.writeAsProperties(config.dist, file, entries); // Writes the parsed result to the dist directory
+                // files.writeAsProperties(config.dist, file, entries); // Writes the parsed result to the dist directory
 
                 // Register the file and its deflated entries to the merger.
                 _merger.addCollection(file, entries);
