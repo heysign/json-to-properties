@@ -63,21 +63,32 @@ options.config= {
 };
 processor.process(options);
 
-const srcDir = "./../signus-service/src/main/resources/i18n";
-const destDir = "./../instsign-certificate-issuer/i18n"
 
-fse.emptyDirSync(destDir, function(err){
-    if (err) {
-        console.error(err);
-    } else {
-        console.log("success!");
-    }
-});
+const sleep = (ms) => {
+    return new Promise(resolve=>{
+        setTimeout(resolve,ms)
+    })
+}
+
+sleep(10000).then(()=>{
+    const srcDir = "./../signus-service/src/main/resources/i18n";
+    const destDir = "./../instsign-certificate-issuer/i18n"
+
+    fse.emptyDirSync(destDir, function(err){
+        if (err) {
+            console.error(err);
+        } else {
+            console.log("success!");
+        }
+    });
 // To copy a folder or file
-rcopy(srcDir, destDir, function (error, results) {
-    if (error) {
-        console.error('Copy failed: ' + error);
-    } else {
-        console.info('Copied ' + results.length + ' files');
-    }
-});
+    rcopy(srcDir, destDir, function (error, results) {
+        if (error) {
+            console.error('Copy failed: ' + error);
+        } else {
+            console.info('Copied ' + results.length + ' files');
+        }
+    });
+
+})
+
