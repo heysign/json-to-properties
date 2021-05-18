@@ -51,15 +51,15 @@ if (program.config) {
 
 options.merge = "messages_en.properties";
 options.config= {
-    src: "./../signus-service/src/main/webapp/i18n/en",
-    dist: "./../signus-service/src/main/resources/i18n"
+    src: "./../heysign-service/src/main/webapp/i18n/en",
+    dist: "./../heysign-service/src/main/resources/i18n"
 };
 processor.process(options);
 
 options.merge = "messages_ko.properties";
 options.config= {
-    src: "../signus-service/src/main/webapp/i18n/ko",
-    dist: "../signus-service/src/main/resources/i18n"
+    src: "../heysign-service/src/main/webapp/i18n/ko",
+    dist: "../heysign-service/src/main/resources/i18n"
 };
 processor.process(options);
 
@@ -71,8 +71,8 @@ const sleep = (ms) => {
 }
 
 sleep(10000).then(()=>{
-    const srcDir = "./../signus-service/src/main/resources/i18n";
-    const destDir = "./../instsign-certificate-issuer/i18n"
+    const srcDir = "./../heysign-service/src/main/resources/i18n";
+    const destDir = "./../heysign-history-pdf-generator/i18n"
 
     fse.emptyDirSync(destDir, function(err){
         if (err) {
